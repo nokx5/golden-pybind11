@@ -1,5 +1,7 @@
 import pytest
 
+from automation import automation
+
 import numpy as np
 import golden
 

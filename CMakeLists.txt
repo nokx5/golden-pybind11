@@ -77,7 +77,6 @@ include_directories(SYSTEM ${Boost_INCLUDE_DIR})
 # * Pybind11  
 find_package(pybind11 REQUIRED)
 
-
 if(NOT DEFINED CMAKE_INSTALL_PYTHON_SITE_PACKAGE)
   set(CMAKE_INSTALL_PYTHON_SITE_PACKAGE "${CMAKE_INSTALL_PREFIX}/lib/python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/site-packages/")
 endif()
@@ -85,8 +84,8 @@ endif()
 ######################################################################
 ### INCLUDE
 ######################################################################
-# configure_file("${PROJECT_SOURCE_DIR}/src/linalg/utils/path.hpp.in" "${PROJECT_BINARY_DIR}/path.hpp")
-# include_directories("${PROJECT_SOURCE_DIR}/src" ${PROJECT_BINARY_DIR})
+# configure_file("${CMAKE_SOURCE_DIR}/src/linalg/utils/path.hpp.in" "${CMAKE_BINARY_DIR}/path.hpp")
+# include_directories("${CMAKE_SOURCE_DIR}/src" ${CMAKE_BINARY_DIR})
 
 ######################################################################
 ### PROJECT
@@ -100,6 +99,7 @@ if(${PROJECT_TESTS})
   include(CTest)
   enable_testing()
   add_subdirectory(tests/cpp/unit)
+  add_subdirectory(tests/python)
 endif()
 if(${PROJECT_SANDBOX})
   add_subdirectory(tests/cpp/sandbox)

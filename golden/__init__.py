@@ -7,5 +7,7 @@
 from .project import dummy
 from .version import __version__
 
+import pyview
+
 __author__ = "nokx"
-__all__ = ["Hello", "Bye"]
+__all__ = ["Hello", "Bye", "pyview"]
