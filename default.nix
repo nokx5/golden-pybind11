@@ -1,4 +1,4 @@
-{ pkgs ? import <nokxpkgs> { }, nixpkgs ? null }:
+{ pkgs ? import <nokxpkgs> { }, clangSupport ? true, cudaSupport ? false }:
 
 with pkgs;
 
@@ -6,7 +6,6 @@ let
   packageOverrides = python-self: python-super: {
     golden_binding = python-super.golden_binding.overrideAttrs (oldAttrs: rec {
       src = ./.; # pkgs.nix-gitignore.gitignoreSource [ ".git" ]
-      # propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ (with python-self; [ ]);
     });
     dev = python-self.golden_binding.overrideAttrs (oldAttrs: rec {
       propagatedBuildInputs = oldAttrs.propagatedBuildInputs
@@ -26,8 +25,12 @@ let
         # yapf
         black
       ]);
-      nativeBuildInputs = oldAttrs.propagatedBuildInputs ++ [ gnumake cmake cmakeCurses ninja clang-tools black ];
+      nativeBuildInputs = oldAttrs.propagatedBuildInputs
+        ++ [ gnumake cmake cmakeCurses ninja clang-tools black ];
+      CC = if clangSupport then "clang" else "gcc";
+      CXX = if clangSupport then "clang" else "gcc";
       shellHook = ''
+        export SSL_CERT_FILE=${cacert}/etc/ssl/certs/ca-bundle.crt
         export PYTHONPATH=$PWD:$PYTHONPATH
       '';
     });
@@ -40,7 +43,6 @@ let
       packageOverrides;
   });
   python3Packages = python3.pkgs;
-
   dev = python3Packages.dev;
 
 in { inherit dev python3 python3Packages; }

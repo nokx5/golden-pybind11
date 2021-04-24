@@ -4,7 +4,6 @@ with pkgs;
 
 let
   stdenv = if clangSupport then clangStdenv else gccStdenv;
-  # python3Packages.override { inherit stdenv; }
   pythonEnv = python3.withPackages (ps:
     with ps; [
       pybind11
@@ -17,6 +16,7 @@ let
       sphinx
       sphinx_rtd_theme
       pytest
+      black
       mypy
       pylint
       flake8
@@ -25,25 +25,19 @@ let
 
 in (mkShell.override { inherit stdenv; }) rec {
 
-  nativeBuildInputs = [ cmake ninja gnumake black ];
+  nativeBuildInputs = [ black cmake ninja gnumake ] ++ [ cacert ];
 
-  buildInputs = [
-      boost
-      # blas hdf5
-      # tbb
-      # eigen
-    ] ++ lib.optionals cudaSupport [ cudatoolkit nvidia_x11 ]
+  buildInputs = [ boost ]
+    ++ lib.optionals cudaSupport [ cudatoolkit nvidia_x11 ]
     ++ lib.optional stdenv.isDarwin fixDarwinDylibNames;
 
-
-  propagatedNativeBuildInputs =
-    [ pythonEnv ]; # avoid separation of devtools in python
-
+  propagatedNativeBuildInputs = [ pythonEnv ];
   propagatedBuildInputs = [ pythonEnv ];
 
   shellHook = ''
-    export PATH=/nix/var/nix/profiles/per-user/$USER/tools-dev/bin/:$PATH
-    export PYTHONPATH=$PYTHONPATH:$PWD;
+    # export PATH=/nix/var/nix/profiles/per-user/$USER/tools-dev/bin/:$PATH
+    export SSL_CERT_FILE=${cacert}/etc/ssl/certs/ca-bundle.crt
+    export PYTHONPATH=$PWD:$PYTHONPATH;
     echo ""
     echo "You may want to import the pybind11 library during development"
     echo "(assuming the project was compiled in ./b*) :"
