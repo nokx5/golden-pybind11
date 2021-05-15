@@ -1,7 +1,7 @@
 { pkgs, project_clang, project_gcc }:
 
 let
-  clangSupport = true;
+  clangSupport = false;
   cudaSupport = false;
 
   stdenv = (with pkgs; if clangSupport then clangStdenv else gccStdenv);
