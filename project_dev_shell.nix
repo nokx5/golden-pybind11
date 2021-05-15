@@ -67,7 +67,10 @@ let
       nbsphinx
     ]);
 in (pkgs.mkShell.override { inherit stdenv; }) rec {
-  buildInputs = (with pkgs; [ zlib ] ++ [ pythonEnv ] ++ project.buildInputs);
+  buildInputs = (with pkgs;
+    [
+      zlib # stdenv.cc.cc.lib
+    ] ++ [ pythonEnv ] ++ project.buildInputs);
   nativeBuildInputs = (with pkgs;
     [
       # stdenv.cc.cc

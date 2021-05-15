@@ -1,5 +1,5 @@
 {
-  description = "A simple Python flake";
+  description = "A simple C++/Python Binding flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
