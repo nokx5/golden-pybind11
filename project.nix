@@ -1,13 +1,13 @@
-{ buildPythonPackage, src, boost, cmake, ninja, numpy, pybind11,
-pytest, sphinx, sphinx_rtd_theme }:
+{ stdenv, buildPythonPackage, src, boost, cmake, ninja, numpy, pybind11, pytest
+, sphinx, sphinx_rtd_theme }:
 
 buildPythonPackage rec {
   pname = "golden_binding";
   version = "0.0.0";
-  inherit src
+  inherit src;
 
   format = "other";
-  
+
   nativeBuildInputs = [ cmake ninja ];
   buildInputs = [ boost pybind11 ];
   propagatedBuildInputs = [ numpy ];
