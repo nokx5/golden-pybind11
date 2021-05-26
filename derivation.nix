@@ -4,9 +4,8 @@
 buildPythonPackage rec {
   pname = "golden_binding";
   version = "0.0.0";
-  inherit src;
-
   format = "other";
+  inherit src;
 
   nativeBuildInputs = [ cmake ninja ];
   buildInputs = [ boost pybind11 ];
