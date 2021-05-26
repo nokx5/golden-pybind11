@@ -5,8 +5,8 @@ from pybind11.setup_helpers import Pybind11Extension, build_ext
 from pybind11 import get_cmake_dir
 
 import sys
-
-from golden.version import __version__
+__version__ = "0.0.0"
+# from golden.version import __version__
 
 # The main interface is through Pybind11Extension.
 # * You can add cxx_std=11/14/17, and then build_ext can be removed.
@@ -22,7 +22,7 @@ ext_modules = [
         "python_example",
         ["src/pybind_view/wrapper_view.cpp"],
         # Example: passing in the version to the compiled code
-        define_macros=[("VERSION_INFO", __version__)],
+        define_macros=[("PROJECT_VERSION", __version__)],
     ),
 ]
 
@@ -34,7 +34,7 @@ setup(
     license="MIT",
     url="https://nokx5.github.io/golden-binding",
     description="Golden project using pybind11 (C++/Python)",
-    packages=["pyview"],
+    # packages=["golden"],
     ext_modules=ext_modules,
     extras_require={"test": "pytest"},
     cmdclass={"build_ext": build_ext},
