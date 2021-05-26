@@ -33,5 +33,12 @@ buildPythonPackage rec {
   #   pytest $src/tests/python -p no:cacheprovider
   #   runHook postCheck
   # '';
+
+  # outputs = [ "doc" "out" ];
+  # preInstall = ''
+  #   mkdir -p $doc/html
+  #   make html -C $src/docs DESTINATION=$TMP/tmp-doc
+  #   mv $TMP/tmp-doc/build-target/html/* $doc/html/
+  # '';
 }
 
