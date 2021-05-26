@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Welcome to the golden binding template &mdash; golden_python 0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> golden_python
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="about/index.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">golden_python</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Welcome to the golden binding template</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/README.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-the-golden-binding-template">
+<h1>Welcome to the <a class="reference external" href="https://nokx5.github.io/golden_binding">golden binding</a> template<a class="headerlink" href="#welcome-to-the-golden-binding-template" title="Permalink to this headline">¶</a></h1>
+<p>This is a skeleton for a C++/python project template.
+Please find all the documentation <a class="reference external" href="https://nokx5.github.io/golden_binding">here</a> and the source code <a class="reference external" href="https://github.com/nokx5/golden_binding">here</a>.</p>
+<div class="section" id="my-development-tools-are">
+<h2>My development tools are<a class="headerlink" href="#my-development-tools-are" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>nix ❄️ (packaging from hell ❤️)</p></li>
+<li><p>clang-format (formatter)</p></li>
+<li><p>black (formatter)</p></li>
+<li><p>vscode (IDE) with</p>
+<ul>
+<li><p>ms-vscode.cmake-tools</p></li>
+<li><p>ms-vscode.cpptools</p></li>
+<li><p>ms-python.vscode-pylance</p></li>
+<li><p>ms-python.python</p></li>
+<li><p>lextudio.restructuredtext</p></li>
+</ul>
+</li>
+<li><p>ctest (tests)</p></li>
+<li><p>pytest (tests)</p></li>
+<li><p>Sphinx (docs)</p></li>
+</ul>
+</div>
+<div class="section" id="use-the-classic-nix-commands">
+<h2>Use the classic Nix commands<a class="headerlink" href="#use-the-classic-nix-commands" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="use-the-software-without-git-clone">
+<h3>Use the software (without git clone)<a class="headerlink" href="#use-the-software-without-git-clone" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="https://github.com/nokx5/nokxpkgs#add-nokxpkgs-to-your-nix-channel">nokxpkgs</a> channel and associate overlay can be imported with the <code class="docutils literal notranslate"><span class="pre">-I</span></code> command or by setting the <code class="docutils literal notranslate"><span class="pre">NIX_PATH</span></code> environment variable.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix-shell -I <span class="nv">nixpkgs</span><span class="o">=</span>https://github.com/nokx5/nokxpkgs/archive/main.tar.gz -p golden_binding --command cli_golden
+</pre></div>
+</div>
+</div>
+<div class="section" id="develop-the-software">
+<h3>Develop the software<a class="headerlink" href="#develop-the-software" title="Permalink to this headline">¶</a></h3>
+<p>Start by cloning the <a class="reference external" href="https://github.com/nokx5/golden_binding">git repository</a> golden python locally and enter it.</p>
+<div class="section" id="option-1-develop-the-software-minimal-requirements">
+<h4>Option 1: Develop the software (minimal requirements)<a class="headerlink" href="#option-1-develop-the-software-minimal-requirements" title="Permalink to this headline">¶</a></h4>
+<p>You can develop or build the local software easily with the minimal requirements.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># option a: develop with a local shell</span>
+nix-shell --expr <span class="s1">&#39;{pkgs ? import &lt;nixpkgs&gt; {} }: with pkgs; callPackage ./derivation.nix {src = ./.; }&#39;</span>
+
+<span class="c1"># option b: build the local project</span>
+nix-build --expr <span class="s1">&#39;{pkgs ? import &lt;nixpkgs&gt; {} }: with pkgs; callPackage ./derivation.nix {src = ./.; }&#39;</span>
+</pre></div>
+</div>
+<p>Note that you can write the nix expression directly to the <code class="docutils literal notranslate"><span class="pre">default.nix</span></code> file to avoid typing <code class="docutils literal notranslate"><span class="pre">--expr</span></code> each time.</p>
+</div>
+<div class="section" id="option-2-develop-the-software-supercharged">
+<h4>Option 2: Develop the software (supercharged 🛰️)<a class="headerlink" href="#option-2-develop-the-software-supercharged" title="Permalink to this headline">¶</a></h4>
+<p>You can enter the supercharged environment for development.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix-shell derivation-shell.nix
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="use-the-experimental-flake-feature">
+<h2>Use the experimental flake feature<a class="headerlink" href="#use-the-experimental-flake-feature" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>NOTE:</strong> This section requires the experimental <em>flake</em> and <em>nix-command</em> features. Please refer to the official documentation for nix flakes. The advantage of using nix flakes is that you avoid channel pinning issues.</p>
+</div>
+<p>After Nix was installed, update to the unstable feature with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix-env -f <span class="s1">&#39;&lt;nixpkgs&gt;&#39;</span> -iA nixUnstable
+</pre></div>
+</div>
+<p>And enable experimental features with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir -p ~/.config/nix
+<span class="nb">echo</span> <span class="s1">&#39;experimental-features = nix-command flakes&#39;</span> &gt;&gt; ~/.config/nix/nix.conf
+</pre></div>
+</div>
+<div class="section" id="id2">
+<h3>Use the software (without git clone)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix shell github:nokx5/golden_binding --command cli_golden
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Develop the software<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Start by cloning the <a class="reference external" href="https://github.com/nokx5/golden_binding">git repository</a> locally and enter it.</p>
+<div class="section" id="option-1-develop-the-software">
+<h4>Option 1: Develop the software<a class="headerlink" href="#option-1-develop-the-software" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># option a: develop with a local shell</span>
+nix run .#cli_golden
+
+<span class="c1"># option b: build the local project</span>
+nix build .#golden_binding
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h4>Option 2: Develop the software (supercharged 🛰️)<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>You can enter the development supercharged environment.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix develop
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="installation-with-pip">
+<h2>Installation with pip<a class="headerlink" href="#installation-with-pip" title="Permalink to this headline">¶</a></h2>
+<p>You can install or upgrade the project with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install golden_binding --upgrade
+</pre></div>
+</div>
+<p>Or you can install from source with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python setup.py install
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="license">
+<h1>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h1>
+<p>You may copy, distribute and modify the software provided that
+modifications are described and licensed for free under the <a class="reference external" href="https://opensource.org/licenses/MIT">MIT</a>.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright MIT.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+Example for numpy array
+=======================
+
+.. code:: ipython3
+
+    import pyview
+
+.. code:: ipython3
+
+    import numpy as np
+    a = np.array([1,2,3,4,5,6,7])
+    print(a)
+
+
+.. parsed-literal::
+
+    [1 2 3 4 5 6 7]
+
+
+.. code:: ipython3
+
+    b = pyview.view_nocopy(a)
+    print(b)
+
+
+.. parsed-literal::
+
+    [2 3 4 5 6]
+
+
+.. code:: ipython3
+
+    b[1] = 50 # instead of 3
+    print(a)
+
+
+.. parsed-literal::
+
+    [ 1  2 50  4  5  6  7]
+
