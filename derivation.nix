@@ -30,7 +30,7 @@ buildPythonPackage rec {
     runHook preCheck
     ctest -V -E "${builtins.concatStringsSep "|" excludedTests}"
     export PYTHONPATH=$out/bin:$PYTHONPATH
-    python -c "import pyview; import golden"
+    python -c "import pyview"
     pytest $src/tests/python -p no:cacheprovider
     runHook postCheck
   '';

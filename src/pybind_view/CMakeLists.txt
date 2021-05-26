@@ -9,4 +9,3 @@ pybind11_add_module(pyview wrapper_view.cpp)
 # * INSTALLATION
 
 install(TARGETS pyview DESTINATION bin)
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/golden DESTINATION bin)
