@@ -9,7 +9,6 @@ Table of contents
    
    about/index.rst
    examples/index.rst
-   autodoc/index.rst
 
 ==================
 Indices and tables
