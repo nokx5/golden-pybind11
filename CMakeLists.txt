@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.18.2 FATAL_ERROR)
 
 # set(CMAKE_CXX_STANDARD 17) set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fPIC
 # -Wall")
@@ -74,7 +74,8 @@ find_package(
 include_directories(SYSTEM ${Boost_INCLUDE_DIR})
 
 # * Pybind11
-find_package(pybind11 REQUIRED)
+find_package(Python COMPONENTS Interpreter Development REQUIRED)
+find_package(pybind11 CONFIG REQUIRED)
 
 if(NOT DEFINED CMAKE_INSTALL_PYTHON_SITE_PACKAGE)
   set(CMAKE_INSTALL_PYTHON_SITE_PACKAGE

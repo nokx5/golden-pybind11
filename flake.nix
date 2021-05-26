@@ -13,14 +13,17 @@
           let
             inherit (pkgs-super.lib) composeExtensions;
             pythonPackageOverrides = python-self: python-super: {
-              project_gcc = python-self.callPackage ./derivation.nix {
+              project_gcc = (python-self.callPackage ./derivation.nix {
                 src = self;
                 stdenv = pkgs-self.gccStdenv;
-              };
-              project_clang = python-self.callPackage ./derivation.nix {
+              }).project_cmake;
+              project_clang = (python-self.callPackage ./derivation.nix {
                 src = self;
                 stdenv = pkgs-self.clangStdenv;
-              };
+              }).project_cmake;
+              project_setuptools = (python-self.callPackage ./derivation.nix {
+                src = self;
+              }).project_setuptools;
               project_dev = python-self.callPackage ./derivation-shell.nix { };
             };
           in {
@@ -51,6 +54,7 @@
         packages = {
           golden_binding = pkgs.python3Packages.project_gcc;
           golden_binding_clang = pkgs.python3Packages.project_clang;
+          golden_binding_setuptools = pkgs.python3Packages.project_setuptools;
         };
         defaultPackage = self.packages.${system}.golden_binding;
         devShell = pkgs.python3Packages.project_dev;
