@@ -1,15 +1,42 @@
-from distutils.core import setup
-from golden.version import __version__
+from setuptools import setup
+
+# Available at setup time due to pyproject.toml
+from pybind11.setup_helpers import Pybind11Extension, build_ext
+from pybind11 import get_cmake_dir
 
 import sys
 
-if sys.version_info < (3, 0):
-    sys.exit("Sorry, Python < 3.0 is not supported")
+from golden.version import __version__
+
+# The main interface is through Pybind11Extension.
+# * You can add cxx_std=11/14/17, and then build_ext can be removed.
+# * You can set include_pybind11=false to add the include directory yourself,
+#   say from a submodule.
+#
+# Note:
+#   Sort input source files if you glob sources to ensure bit-for-bit
+#   reproducible builds (https://github.com/pybind/python_example/pull/53)
+
+ext_modules = [
+    Pybind11Extension(
+        "python_example",
+        ["src/pybind_view/wrapper_view.cpp"],
+        # Example: passing in the version to the compiled code
+        define_macros=[("VERSION_INFO", __version__)],
+    ),
+]
 
 setup(
-    name="cmake_cpp_pybind11",
+    name="golden_binding",
     version=__version__,
+    author="nokx",
+    author_email="info@nokx.ch",
+    license="MIT",
+    url="https://nokx5.github.io/golden-binding",
+    description="Golden project using pybind11 (C++/Python)",
     packages=["pyview"],
-    package_dir={"": "${CMAKE_CURRENT_BINARY_DIR}"},
-    package_data={"": ["pyview*.so"]},
+    ext_modules=ext_modules,
+    extras_require={"test": "pytest"},
+    cmdclass={"build_ext": build_ext},
+    zip_safe=False,
 )
