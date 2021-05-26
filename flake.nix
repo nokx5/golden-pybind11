@@ -13,17 +13,18 @@
           let
             inherit (pkgs-super.lib) composeExtensions;
             pythonPackageOverrides = python-self: python-super: {
-              project_gcc = (python-self.callPackage ./derivation.nix {
+              project_gcc = python-self.callPackage ./derivation.nix {
                 src = self;
                 stdenv = pkgs-self.gccStdenv;
-              }).project_cmake;
-              project_clang = (python-self.callPackage ./derivation.nix {
+              };
+              project_clang = python-self.callPackage ./derivation.nix {
                 src = self;
                 stdenv = pkgs-self.clangStdenv;
-              }).project_cmake;
-              project_setuptools = (python-self.callPackage ./derivation.nix {
-                src = self;
-              }).project_setuptools;
+              };
+              project_setuptools =
+                python-self.callPackage ./derivation-setuptools.nix {
+                  src = self;
+                };
               project_dev = python-self.callPackage ./derivation-shell.nix { };
             };
           in {
