@@ -6,21 +6,26 @@ on:
 
 jobs:
   tests:
-    name: Check flake
+    name: Check with nix build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout (clean environment)
         uses: actions/checkout@v2.3.4
         with:
           fetch-depth: 0 # Nix Flakes doesn't work on shallow clones
-      - name: Install Nix (flakes, nixpkgs-unstable)
+      - name: Use Nix (flakes, nixpkgs-unstable)
         uses: cachix/install-nix-action@v13
         with:
-          install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20201221_9fab14a/install
+          install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20210429_d15a196/install
           extra_nix_config: |
             experimental-features = nix-command flakes
           nix_path: nixpkgs=channel:nixpkgs-unstable
-      - name: Check flake
+      - name: Use Cachix (Never build software more than once)
+        uses: cachix/cachix-action@v10
+        with:
+          name: nokx5-golden-binding
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - name: Check flakes evaluation
         run: nix flake check -v --show-trace --no-update-lock-file
-      - name: Build Project
-        run: nix build . --no-link --show-trace --no-update-lock-file
+      - name: Build project (run tests)
+        run: nix build . --show-trace --no-update-lock-file
