@@ -4,7 +4,7 @@
 Welcome to the `golden binding`_ template
 =========================================
 This is a skeleton for a C++/python project template. 
-Please find all the documentation `here <https://nokx5.github.io/golden_binding>`_ and the source code `here <https://github.com/nokx5/golden_binding>`_.
+Please find all the documentation `here <https://nokx5.github.io/golden_binding>`_ and the source code `there <https://github.com/nokx5/golden_binding>`_.
 
 My development tools are
 ========================
