@@ -90,8 +90,12 @@ endif()
 # INCLUDE
 # ##############################################################################
 configure_file("${CMAKE_SOURCE_DIR}/src/utils/static.hpp.in"
-               "${CMAKE_BINARY_DIR}/path.hpp")
+               "${CMAKE_BINARY_DIR}/static.hpp")
 include_directories("${CMAKE_SOURCE_DIR}/src" ${CMAKE_BINARY_DIR})
+
+# add_compile_definitions(COMPLEX_NUMBERS)
+# add_compile_definitions(FLOAT_NUMBERS)
+
 
 # ##############################################################################
 # PROJECT

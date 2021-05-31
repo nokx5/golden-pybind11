@@ -12,7 +12,7 @@ namespace utils {
     }
   };
   const std::string static version() {
-    return "@PROJECT_VERSION@/";
+    return "@PROJECT_VERSION@";
   }
   
 }
