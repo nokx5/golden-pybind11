@@ -74,7 +74,10 @@ find_package(
 include_directories(SYSTEM ${Boost_INCLUDE_DIR})
 
 # * Pybind11
-find_package(Python COMPONENTS Interpreter Development REQUIRED)
+find_package(
+  Python
+  COMPONENTS Interpreter Development
+  REQUIRED)
 find_package(pybind11 CONFIG REQUIRED)
 
 if(NOT DEFINED CMAKE_INSTALL_PYTHON_SITE_PACKAGE)
@@ -86,14 +89,15 @@ endif()
 # ##############################################################################
 # INCLUDE
 # ##############################################################################
-# configure_file("${CMAKE_SOURCE_DIR}/src/linalg/utils/path.hpp.in"
-# "${CMAKE_BINARY_DIR}/path.hpp") include_directories("${CMAKE_SOURCE_DIR}/src"
-# ${CMAKE_BINARY_DIR})
+configure_file("${CMAKE_SOURCE_DIR}/src/utils/static.hpp.in"
+               "${CMAKE_BINARY_DIR}/path.hpp")
+include_directories("${CMAKE_SOURCE_DIR}/src" ${CMAKE_BINARY_DIR})
 
 # ##############################################################################
 # PROJECT
 # ##############################################################################
-add_subdirectory(src)
+add_subdirectory(src/golden)
+add_subdirectory(src/binding)
 
 # ##############################################################################
 # TESTS and miscelaneous
