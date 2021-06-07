@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Welcome to the golden binding template &mdash; golden_binding 0.0 documentation</title>
+  <title>Welcome to the golden binding template &mdash; golden-pybind11 0.0 documentation</title>
   
 
   
@@ -51,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> golden_binding
+            <a href="index.html" class="icon icon-home"> golden-pybind11
           
 
           
@@ -100,7 +100,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">golden_binding</a>
+          <a href="index.html">golden-pybind11</a>
         
       </nav>
 
@@ -153,9 +153,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="welcome-to-the-golden-binding-template">
-<h1>Welcome to the <a class="reference external" href="https://nokx5.github.io/golden_binding">golden binding</a> template<a class="headerlink" href="#welcome-to-the-golden-binding-template" title="Permalink to this headline">¶</a></h1>
+<h1>Welcome to the <a class="reference external" href="https://nokx5.github.io/golden-pybind11">golden binding</a> template<a class="headerlink" href="#welcome-to-the-golden-binding-template" title="Permalink to this headline">¶</a></h1>
 <p>This is a skeleton for a C++/python project template.
-Please find all the documentation <a class="reference external" href="https://nokx5.github.io/golden_binding">here</a> and the source code <a class="reference external" href="https://github.com/nokx5/golden_binding">there</a>.</p>
+Please find all the documentation <a class="reference external" href="https://nokx5.github.io/golden-pybind11">here</a> and the source code <a class="reference external" href="https://github.com/nokx5/golden-pybind11">there</a>.</p>
 <div class="section" id="my-development-tools-are">
 <h2>My development tools are<a class="headerlink" href="#my-development-tools-are" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -181,13 +181,13 @@ Please find all the documentation <a class="reference external" href="https://no
 <div class="section" id="use-the-software-without-git-clone">
 <h3>Use the software (without git clone)<a class="headerlink" href="#use-the-software-without-git-clone" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference external" href="https://github.com/nokx5/nokxpkgs#add-nokxpkgs-to-your-nix-channel">nokxpkgs</a> channel and associate overlay can be imported with the <code class="docutils literal notranslate"><span class="pre">-I</span></code> command or by setting the <code class="docutils literal notranslate"><span class="pre">NIX_PATH</span></code> environment variable.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix-shell -I <span class="nv">nixpkgs</span><span class="o">=</span>https://github.com/nokx5/nokxpkgs/archive/main.tar.gz -p golden_binding --command cli_golden
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix-shell -I <span class="nv">nixpkgs</span><span class="o">=</span>https://github.com/nokx5/nokxpkgs/archive/main.tar.gz -p golden-pybind11 --command cli_golden
 </pre></div>
 </div>
 </div>
 <div class="section" id="develop-the-software">
 <h3>Develop the software<a class="headerlink" href="#develop-the-software" title="Permalink to this headline">¶</a></h3>
-<p>Start by cloning the <a class="reference external" href="https://github.com/nokx5/golden_binding">git repository</a> golden python locally and enter it.</p>
+<p>Start by cloning the <a class="reference external" href="https://github.com/nokx5/golden-pybind11">git repository</a> golden python locally and enter it.</p>
 <div class="section" id="option-1-develop-the-software-minimal-requirements">
 <h4>Option 1: Develop the software (minimal requirements)<a class="headerlink" href="#option-1-develop-the-software-minimal-requirements" title="Permalink to this headline">¶</a></h4>
 <p>You can develop or build the local software easily with the minimal requirements.</p>
@@ -226,20 +226,20 @@ nix-build --expr <span class="s1">&#39;{pkgs ? import &lt;nixpkgs&gt; {} }: with
 </div>
 <div class="section" id="id1">
 <h3>Use the software (without git clone)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix shell github:nokx5/golden_binding --command cli_golden
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix shell github:nokx5/golden-pybind11 --command cli_golden
 </pre></div>
 </div>
 </div>
 <div class="section" id="id2">
 <h3>Develop the software<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<p>Start by cloning the <a class="reference external" href="https://github.com/nokx5/golden_binding">git repository</a> locally and enter it.</p>
+<p>Start by cloning the <a class="reference external" href="https://github.com/nokx5/golden-pybind11">git repository</a> locally and enter it.</p>
 <div class="section" id="option-1-develop-the-software">
 <h4>Option 1: Develop the software<a class="headerlink" href="#option-1-develop-the-software" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># option a: develop with a local shell</span>
 nix run .#cli_golden
 
 <span class="c1"># option b: build the local project</span>
-nix build .#golden_binding
+nix build .#golden-pybind11
 </pre></div>
 </div>
 </div>
@@ -255,13 +255,23 @@ nix build .#golden_binding
 <div class="section" id="installation-with-pip">
 <h2>Installation with pip<a class="headerlink" href="#installation-with-pip" title="Permalink to this headline">¶</a></h2>
 <p>You can install or upgrade the project with:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install golden_binding --upgrade
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install golden-pybind11 --upgrade
 </pre></div>
 </div>
 <p>Or you can install from source with:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python setup.py install
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="code-snippets">
+<h1>Code Snippets<a class="headerlink" href="#code-snippets" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nixfmt <span class="k">$(</span>find -name <span class="s2">&quot;*.nix&quot;</span><span class="k">)</span>
+
+clang-format -i <span class="k">$(</span>find . -path <span class="s2">&quot;./build*&quot;</span> -prune  -name <span class="s2">&quot;*.c&quot;</span> -o -name <span class="s2">&quot;*.cpp&quot;</span> -o -name <span class="s2">&quot;*.h&quot;</span> -o -name <span class="s2">&quot;*.hpp&quot;</span><span class="k">)</span>
+
+cmake-format -i <span class="k">$(</span>find . -path <span class="s2">&quot;./build*&quot;</span> -prune  -name <span class="s2">&quot;*.cmake&quot;</span> -o -name <span class="s2">&quot;CMakeLists.txt&quot;</span><span class="k">)</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="license">
