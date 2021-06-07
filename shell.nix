@@ -36,7 +36,7 @@ let
         ];
     });
   pythonEnv = (with pythonPackages; # note that checkInputs are missing!
-    [ ] ++ [
+    [ numpy ] ++ [
       #------------#
       # additional #
       #------------#
@@ -96,7 +96,7 @@ in (pkgs.mkShell.override { inherit stdenv; }) rec {
     echo "You may want to import the pybind11 library during development"
     echo "(assuming the project was compiled in ./b*) :"
     echo ""
-    echo "export PYTHONPATH=\$(readlink -f \$PWD/b*/src/pybind_* | tr '\\n' ':'):\$PYTHONPATH"
+    echo "export PYTHONPATH=\$(readlink -f \$PWD/b*/src/binding/ | tr '\\n' ':'):\$PYTHONPATH"
     echo ""
   '';
 }
