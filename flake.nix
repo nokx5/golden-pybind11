@@ -13,19 +13,19 @@
           let
             inherit (pkgs-super.lib) composeExtensions;
             pythonPackageOverrides = python-self: python-super: {
-              project_gcc = python-self.callPackage ./derivation.nix {
+              golden-pybind11 = python-self.callPackage ./derivation.nix {
                 src = self;
                 stdenv = pkgs-self.gccStdenv;
               };
-              project_clang = python-self.callPackage ./derivation.nix {
+              golden-pybind11-clang = python-self.callPackage ./derivation.nix {
                 src = self;
                 stdenv = pkgs-self.clangStdenv;
               };
-              project_setuptools =
-                python-self.callPackage ./derivation-setuptools.nix {
-                  src = self;
-                };
-              project_dev = python-self.callPackage ./shell.nix { };
+              # project_setuptools =
+              #   python-self.callPackage ./derivation-setuptools.nix {
+              #     src = self;
+              #   };
+              fullDev = python-self.callPackage ./shell.nix { };
             };
           in {
             python37 = pkgs-super.python37.override (old: {
@@ -53,11 +53,10 @@
         };
       in {
         packages = {
-          golden-pybind11 = pkgs.python3Packages.project_gcc;
-          golden-pybind11_clang = pkgs.python3Packages.project_clang;
-          golden-pybind11_setuptools = pkgs.python3Packages.project_setuptools;
+          inherit (pkgs.python3Packages)
+            fullDev golden-pybind11 golden-pybind11-clang;
         };
         defaultPackage = self.packages.${system}.golden-pybind11;
-        devShell = pkgs.python3Packages.project_dev;
+        devShell = self.packages.${system}.golden-pybind11;
       });
 }

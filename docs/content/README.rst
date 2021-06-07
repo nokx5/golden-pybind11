@@ -110,7 +110,7 @@ Option 1: Develop the software
 .. code:: shell
 
     # option a: develop with a local shell
-    nix run .#cli_golden
+    nix develop .#golden-pybind11
 
     # option b: build the local project
     nix build .#golden-pybind11
@@ -122,7 +122,7 @@ You can enter the development supercharged environment.
 
 .. code:: shell
 
-    nix develop
+    nix develop .#shell-dev
 
 
 Installation with pip
