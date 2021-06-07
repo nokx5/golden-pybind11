@@ -1,11 +1,8 @@
-{ pkgs, project_clang, project_gcc }:
+{ pkgs ? import <nixpkgs> { config.allowUnfree = true; }, clangSupport ? false
+}:
 
 let
-  clangSupport = false;
-  cudaSupport = false;
-
   stdenv = (with pkgs; if clangSupport then clangStdenv else gccStdenv);
-  project = if clangSupport then project_clang else project_gcc;
   pythonPackages = pkgs.python3Packages;
 
   vscodeExt = (with pkgs;
@@ -39,7 +36,7 @@ let
         ];
     });
   pythonEnv = (with pythonPackages; # note that checkInputs are missing!
-    (with project; propagatedBuildInputs ++ propagatedNativeBuildInputs) ++ [
+    [ ] ++ [
       #------------#
       # additional #
       #------------#
@@ -68,11 +65,11 @@ let
     ]);
 in (pkgs.mkShell.override { inherit stdenv; }) rec {
   buildInputs = (with pkgs;
-    [
+    [ boost pybind11 ] ++ [
       zlib # stdenv.cc.cc.lib
-    ] ++ [ pythonEnv ] ++ project.buildInputs);
+    ] ++ [ pythonEnv ]);
   nativeBuildInputs = (with pkgs;
-    [
+    [ cmake ninja ] ++ [
       # stdenv.cc.cc
       # libcxxabi	      
       bashCompletion
@@ -91,7 +88,7 @@ in (pkgs.mkShell.override { inherit stdenv; }) rec {
       pandoc
       typora
       vscodeExt
-    ] ++ [ black jupyter pythonEnv sphinx yapf ] ++ project.nativeBuildInputs);
+    ] ++ [ black jupyter pythonEnv sphinx yapf ]);
   shellHook = ''
     export SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
     export PYTHONPATH=$PWD:$PYTHONPATH

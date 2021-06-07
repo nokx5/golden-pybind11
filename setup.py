@@ -26,12 +26,12 @@ ext_modules = [
 ]
 
 setup(
-    name="golden_binding",
+    name="golden-pybind11",
     version=__version__,
     author="nokx",
     author_email="info@nokx.ch",
     license="MIT",
-    url="https://nokx5.github.io/golden_binding",
+    url="https://nokx5.github.io/golden-pybind11",
     description="Golden project using pybind11 (C++/Python)",
     ext_modules=ext_modules,
     extras_require={"test": "pytest"},

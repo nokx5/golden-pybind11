@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.18.2 FATAL_ERROR)
 set(PROJECT_VERSION "0.0.0")
 
 project(
-  golden_binding
+  golden-pybind11
   LANGUAGES C CXX
   VERSION "${PROJECT_VERSION}"
   DESCRIPTION "Hybrid C++/Python Golden Project")

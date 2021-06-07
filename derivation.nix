@@ -2,7 +2,7 @@
 , sphinx, sphinx_rtd_theme }:
 
 buildPythonPackage rec {
-  pname = "golden_binding";
+  pname = "golden-pybind11";
   version = "0.0.0";
   format = "other";
   inherit src;

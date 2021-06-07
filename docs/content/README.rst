@@ -1,10 +1,10 @@
-.. _golden binding: https://nokx5.github.io/golden_binding
+.. _golden binding: https://nokx5.github.io/golden-pybind11
 
 =========================================
 Welcome to the `golden binding`_ template
 =========================================
 This is a skeleton for a C++/python project template. 
-Please find all the documentation `here <https://nokx5.github.io/golden_binding>`_ and the source code `there <https://github.com/nokx5/golden_binding>`_.
+Please find all the documentation `here <https://nokx5.github.io/golden-pybind11>`_ and the source code `there <https://github.com/nokx5/golden-pybind11>`_.
 
 My development tools are
 ========================
@@ -40,13 +40,13 @@ The `nokxpkgs <https://github.com/nokx5/nokxpkgs#add-nokxpkgs-to-your-nix-channe
 
 .. code:: shell
 
-    nix-shell -I nixpkgs=https://github.com/nokx5/nokxpkgs/archive/main.tar.gz -p golden_binding --command cli_golden
+    nix-shell -I nixpkgs=https://github.com/nokx5/nokxpkgs/archive/main.tar.gz -p golden-pybind11 --command cli_golden
 
 
 Develop the software
 --------------------
 
-Start by cloning the `git repository <https://github.com/nokx5/golden_binding>`_ golden python locally and enter it. 
+Start by cloning the `git repository <https://github.com/nokx5/golden-pybind11>`_ golden python locally and enter it. 
 
 Option 1: Develop the software (minimal requirements)
 .....................................................
@@ -96,13 +96,13 @@ Use the software (without git clone)
 
 .. code:: shell
 
-    nix shell github:nokx5/golden_binding --command cli_golden
+    nix shell github:nokx5/golden-pybind11 --command cli_golden
 
 
 Develop the software
 --------------------
 
-Start by cloning the `git repository <https://github.com/nokx5/golden_binding>`_ locally and enter it. 
+Start by cloning the `git repository <https://github.com/nokx5/golden-pybind11>`_ locally and enter it. 
 
 Option 1: Develop the software
 ..............................
@@ -113,7 +113,7 @@ Option 1: Develop the software
     nix run .#cli_golden
 
     # option b: build the local project
-    nix build .#golden_binding
+    nix build .#golden-pybind11
 
 Option 2: Develop the software (supercharged 🛰️)
 ................................................
@@ -132,13 +132,25 @@ You can install or upgrade the project with:
 
 .. code:: shell
 
-    pip install golden_binding --upgrade
+    pip install golden-pybind11 --upgrade
 
 Or you can install from source with:
 
 .. code:: shell
 
     python setup.py install
+
+=============
+Code Snippets
+=============
+
+.. code:: shell
+
+    nixfmt $(find -name "*.nix")
+
+    clang-format -i $(find . -path "./build*" -prune  -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp")
+
+    cmake-format -i $(find . -path "./build*" -prune  -name "*.cmake" -o -name "CMakeLists.txt")
 
 =======
 License

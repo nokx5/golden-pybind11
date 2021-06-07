@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath(os.getenv("ROOTDIR","../.."))) # for autodoc
 
 # -- Project information -----------------------------------------------------
 
-project = "golden_binding"
+project = "golden-pybind11"
 copyright = "MIT"
 author = "info@nokx.ch"
 

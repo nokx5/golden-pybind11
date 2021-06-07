@@ -25,7 +25,7 @@
                 python-self.callPackage ./derivation-setuptools.nix {
                   src = self;
                 };
-              project_dev = python-self.callPackage ./derivation-shell.nix { };
+              project_dev = python-self.callPackage ./shell.nix { };
             };
           in {
             python37 = pkgs-super.python37.override (old: {
@@ -48,16 +48,16 @@
 
         pkgs = import nixpkgs {
           inherit system;
-          config = { allowUnfree = true; };
+          config.allowUnfree = true;
           overlays = [ overlay ];
         };
       in {
         packages = {
-          golden_binding = pkgs.python3Packages.project_gcc;
-          golden_binding_clang = pkgs.python3Packages.project_clang;
-          golden_binding_setuptools = pkgs.python3Packages.project_setuptools;
+          golden-pybind11 = pkgs.python3Packages.project_gcc;
+          golden-pybind11_clang = pkgs.python3Packages.project_clang;
+          golden-pybind11_setuptools = pkgs.python3Packages.project_setuptools;
         };
-        defaultPackage = self.packages.${system}.golden_binding;
+        defaultPackage = self.packages.${system}.golden-pybind11;
         devShell = pkgs.python3Packages.project_dev;
       });
 }
