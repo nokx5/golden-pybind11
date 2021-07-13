@@ -26,9 +26,9 @@
       repoDescription = "golden-pybind11 - A simple pybind11 flake";
     in
     {
-      overlay = final: pred:
+      overlay = final: prev:
         let
-          inherit (pred.lib) composeExtensions;
+          inherit (prev.lib) composeExtensions;
           pythonPackageOverrides = python-self: python-super: {
             golden-pybind11 = python-self.callPackage ./derivation.nix {
               src = self;
@@ -45,17 +45,17 @@
           };
         in
         {
-          python37 = pred.python37.override (old: {
+          python37 = prev.python37.override (old: {
             packageOverrides =
               composeExtensions (old.packageOverrides or (_: _: { }))
                 pythonPackageOverrides;
           });
-          python38 = pred.python38.override (old: {
+          python38 = prev.python38.override (old: {
             packageOverrides =
               composeExtensions (old.packageOverrides or (_: _: { }))
                 pythonPackageOverrides;
           });
-          python39 = pred.python39.override (old: {
+          python39 = prev.python39.override (old: {
             packageOverrides =
               composeExtensions (old.packageOverrides or (_: _: { }))
                 pythonPackageOverrides;
@@ -73,7 +73,7 @@
       };
       packages = forAllSystems (system:
         with nixpkgsFor.${system}; {
-          inherit golden-pybind11 golden-pybind11-clang;
+          inherit (python3Packages) golden-pybind11 golden-pybind11-clang;
         });
 
       defaultPackage = forAllSystems (system:

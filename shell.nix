@@ -87,11 +87,7 @@ in
       nixpkgs-fmt
       pkg-config
       emacs-nox
-      vscodeExt
-      pandoc
-      typora
-      vscodeExt
-    ] ++ [ black jupyter pythonEnv sphinx yapf ]);
+    ] ++ lib.optionals (hostPlatform.isLinux) [ typora vscodeExt ] ++ [ black jupyter pythonEnv sphinx yapf ]);
   shellHook = ''
     export SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt
     export PYTHONPATH=$PWD:$PYTHONPATH
