@@ -40,6 +40,7 @@ let
       #------------#
       # additional #
       #------------#
+      pybind11
       decorator
       pyjson5
       toml
@@ -65,7 +66,7 @@ let
     ]);
 in (pkgs.mkShell.override { inherit stdenv; }) rec {
   buildInputs = (with pkgs;
-    [ boost pybind11 ] ++ [
+    [ boost ] ++ [
       zlib # stdenv.cc.cc.lib
     ] ++ [ pythonEnv ]);
   nativeBuildInputs = (with pkgs;
@@ -81,7 +82,7 @@ in (pkgs.mkShell.override { inherit stdenv; }) rec {
       gdb
       git
       gnumake
-      nixfmt
+      nixpkgs-fmt
       pkg-config
       emacs-nox
       vscodeExt
