@@ -1,4 +1,5 @@
-{ pkgs ? import <nixpkgs> { config.allowUnfree = true; }, clangSupport ? false
+{ pkgs ? import <nixpkgs> { config.allowUnfree = true; }
+, clangSupport ? false
 }:
 
 let
@@ -64,7 +65,8 @@ let
       nbconvert
       nbsphinx
     ]);
-in (pkgs.mkShell.override { inherit stdenv; }) rec {
+in
+(pkgs.mkShell.override { inherit stdenv; }) rec {
   buildInputs = (with pkgs;
     [ boost ] ++ [
       zlib # stdenv.cc.cc.lib
@@ -72,7 +74,7 @@ in (pkgs.mkShell.override { inherit stdenv; }) rec {
   nativeBuildInputs = (with pkgs;
     [ cmake ninja ] ++ [
       # stdenv.cc.cc
-      # libcxxabi	      
+      # libcxxabi        
       bashCompletion
       cacert
       clang-tools

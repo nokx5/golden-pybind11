@@ -26,41 +26,42 @@
       repoDescription = "golden-pybind11 - A simple pybind11 flake";
     in
     {
-    overlay = final: pred:
-          let
-            inherit (pred.lib) composeExtensions;
-            pythonPackageOverrides = python-self: python-super: {
-              golden-pybind11 = python-self.callPackage ./derivation.nix {
-                src = self;
-                stdenv = final.gccStdenv;
-              };
-              golden-pybind11-clang = python-self.callPackage ./derivation.nix {
-                src = self;
-                stdenv = final.clangStdenv;
-              };
-              # project_setuptools =
-              #   python-self.callPackage ./derivation-setuptools.nix {
-              #     src = self;
-              #   };
+      overlay = final: pred:
+        let
+          inherit (pred.lib) composeExtensions;
+          pythonPackageOverrides = python-self: python-super: {
+            golden-pybind11 = python-self.callPackage ./derivation.nix {
+              src = self;
+              stdenv = final.gccStdenv;
             };
-          in {
-            python37 = pred.python37.override (old: {
-              packageOverrides =
-                composeExtensions (old.packageOverrides or (_: _: { }))
-                pythonPackageOverrides;
-            });
-            python38 = pred.python38.override (old: {
-              packageOverrides =
-                composeExtensions (old.packageOverrides or (_: _: { }))
-                pythonPackageOverrides;
-            });
-            python39 = pred.python39.override (old: {
-              packageOverrides =
-                composeExtensions (old.packageOverrides or (_: _: { }))
-                pythonPackageOverrides;
-            });
-            python3 = final.python38;
+            golden-pybind11-clang = python-self.callPackage ./derivation.nix {
+              src = self;
+              stdenv = final.clangStdenv;
+            };
+            # project_setuptools =
+            #   python-self.callPackage ./derivation-setuptools.nix {
+            #     src = self;
+            #   };
           };
+        in
+        {
+          python37 = pred.python37.override (old: {
+            packageOverrides =
+              composeExtensions (old.packageOverrides or (_: _: { }))
+                pythonPackageOverrides;
+          });
+          python38 = pred.python38.override (old: {
+            packageOverrides =
+              composeExtensions (old.packageOverrides or (_: _: { }))
+                pythonPackageOverrides;
+          });
+          python39 = pred.python39.override (old: {
+            packageOverrides =
+              composeExtensions (old.packageOverrides or (_: _: { }))
+                pythonPackageOverrides;
+          });
+          python3 = final.python38;
+        };
 
       devShell = forDevSystems (system:
         let pkgs = nixpkgsFor.${system}; in pkgs.callPackage ./shell.nix { clangSupport = false; }

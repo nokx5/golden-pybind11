@@ -1,5 +1,15 @@
-{ stdenv, buildPythonPackage, src, boost, cmake, ninja, numpy, pybind11, pytest
-, sphinx, sphinx_rtd_theme }:
+{ stdenv
+, buildPythonPackage
+, src
+, boost
+, cmake
+, ninja
+, numpy
+, pybind11
+, pytest
+, sphinx
+, sphinx_rtd_theme
+}:
 
 buildPythonPackage rec {
   pname = "golden-pybind11";
