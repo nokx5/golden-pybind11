@@ -32,7 +32,7 @@
           pythonPackageOverrides = python-self: python-super: {
             golden-pybind11 = python-self.callPackage ./derivation.nix {
               src = self;
-              stdenv = final.gccStdenv;
+	      stdenv = if prev.stdenv.hostPlatform.isDarwin then final.clangStdenv else final.gccStdenv;
             };
             golden-pybind11-clang = python-self.callPackage ./derivation.nix {
               src = self;
