@@ -70,6 +70,23 @@
       hydraJobs = {
         build = forDevSystems (system: nixpkgsFor.${system}.python3Packages.golden-pybind11);
         build-clang = forDevSystems (system: nixpkgsFor.${system}.python3Packages.golden-pybind11-clang);
+
+        release = forDevSystems (system:
+          with nixpkgsFor.${system}; releaseTools.aggregate
+            {
+              name = "${repoName}-release-${repoVersion}";
+              constituents =
+                [
+                  self.hydraJobs.build.${system}
+                  self.hydraJobs.build-clang.${system}
+                  #self.hydraJobs.docker.${system}
+                ] ++ lib.optionals (hostPlatform.isLinux) [
+                  #self.hydraJobs.deb.x86_64-linux
+                  #self.hydraJobs.rpm.x86_64-linux
+                  #self.hydraJobs.coverage.x86_64-linux
+                ];
+              meta.description = "hydraJobs: ${repoDescription}";
+            });
       };
       packages = forAllSystems (system:
         with nixpkgsFor.${system}; {

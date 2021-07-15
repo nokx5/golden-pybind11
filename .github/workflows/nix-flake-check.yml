@@ -1,12 +1,11 @@
-name: "Tests"
+name: "NIX"
 
 on:
   pull_request:
   push:
 
 jobs:
-  tests:
-    name: Check with nix build
+  flake-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout (clean environment)
@@ -20,12 +19,5 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes
           nix_path: nixpkgs=channel:nixpkgs-unstable
-      - name: Use Cachix (Never build software more than once)
-        uses: cachix/cachix-action@v10
-        with:
-          name: nokx5-golden-binding
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Check flakes evaluation
+      - name: Check flake evaluation
         run: nix flake check -v --show-trace --no-update-lock-file
-      - name: Build project (run tests)
-        run: nix build . --show-trace --no-update-lock-file
