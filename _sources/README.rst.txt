@@ -13,7 +13,7 @@ Welcome to the `golden binding`_ template
 .. |DocBadge| image:: https://github.com/nokx5/golden-pybind11/workflows/doc-api/badge.svg
 .. _DocBadge: https://nokx5.github.io/golden-pybind11
 .. |LicenseBadge| image:: http://img.shields.io/badge/license-MIT-blue.svg
-.. _LicenseBadge: https://github.com/nokx5/golden-cpp/blob/master/LICENSE
+.. _LicenseBadge: https://github.com/nokx5/golden-pybind11/blob/master/LICENSE
 
 This is a skeleton for a C++/python project template. 
 Please find all the documentation `here <https://nokx5.github.io/golden-pybind11>`_ and the source code `there <https://github.com/nokx5/golden-pybind11>`_.
