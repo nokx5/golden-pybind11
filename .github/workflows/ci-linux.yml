@@ -1,0 +1,21 @@
+name: "CI-linux"
+on:
+  pull_request:
+  push:
+jobs:
+  nix-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (clean environment)
+        uses: actions/checkout@v2.3.4
+      - name: Install Default Nix Commands
+        uses: cachix/install-nix-action@v13
+      - name: Use Cachix (Never build software more than once)
+        uses: cachix/cachix-action@v10
+        with:
+          name: nokxpkgs
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - name: Build Linux Environment
+        run: nix-build . -A hydraJobs.release.x86_64-linux.inputDerivation --show-trace
+      - name: Build Linux Release (run tests)
+        run: nix-build . -A hydraJobs.release.x86_64-linux --show-trace
