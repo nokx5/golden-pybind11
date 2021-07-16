@@ -3,6 +3,18 @@
 =========================================
 Welcome to the `golden binding`_ template
 =========================================
+
+|CILinuxBadge|_ |CIDarwinBadge|_ |DocBadge|_ |LicenseBadge|_
+
+.. |CILinuxBadge| image:: https://github.com/nokx5/golden-pybind11/workflows/CI-linux/badge.svg
+.. _CILinuxBadge: https://github.com/nokx5/golden-pybind11/actions/workflows/ci-linux.yml
+.. |CIDarwinBadge| image:: https://github.com/nokx5/golden-pybind11/workflows/CI-darwin/badge.svg
+.. _CIDarwinBadge: https://github.com/nokx5/golden-pybind11/actions/workflows/ci-darwin.yml
+.. |DocBadge| image:: https://github.com/nokx5/golden-pybind11/workflows/doc-api/badge.svg
+.. _DocBadge: https://nokx5.github.io/golden-pybind11
+.. |LicenseBadge| image:: http://img.shields.io/badge/license-MIT-blue.svg
+.. _LicenseBadge: https://github.com/nokx5/golden-pybind11/blob/master/LICENSE
+
 This is a skeleton for a C++/python project template. 
 Please find all the documentation `here <https://nokx5.github.io/golden-pybind11>`_ and the source code `there <https://github.com/nokx5/golden-pybind11>`_.
 
