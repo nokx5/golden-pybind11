@@ -68,10 +68,10 @@ You can develop or build the local software easily with the minimal requirements
 .. code:: shell
 
     # option a: develop with a local shell
-    nix-shell --expr '{pkgs ? import <nixpkgs> {} }: with pkgs; with python3Packages; callPackage ./derivation.nix { src = ./.; }'
+    nix-shell --expr 'with import <nixpkgs> {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }'
     
     # option b: build the local project
-    nix-build --expr '{pkgs ? import <nixpkgs> {} }: with pkgs; with python3Packages; callPackage ./derivation.nix { src = ./.; }'
+    nix-build --expr 'with import <nixpkgs> {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }'
 
 Note that you can write the nix expression directly to the ``default.nix`` file to avoid typing ``--expr`` each time.
 
