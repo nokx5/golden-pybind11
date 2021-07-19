@@ -202,10 +202,10 @@ Please find all the documentation <a class="reference external" href="https://no
 <h4>Option 1: Develop the software (minimal requirements)<a class="headerlink" href="#option-1-develop-the-software-minimal-requirements" title="Permalink to this headline">¶</a></h4>
 <p>You can develop or build the local software easily with the minimal requirements.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># option a: develop with a local shell</span>
-nix-shell --expr <span class="s1">&#39;{pkgs ? import &lt;nixpkgs&gt; {} }: with pkgs; with python3Packages; callPackage ./derivation.nix { src = ./.; }&#39;</span>
+nix-shell --expr <span class="s1">&#39;with import &lt;nixpkgs&gt; {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }&#39;</span>
 
 <span class="c1"># option b: build the local project</span>
-nix-build --expr <span class="s1">&#39;{pkgs ? import &lt;nixpkgs&gt; {} }: with pkgs; with python3Packages; callPackage ./derivation.nix { src = ./.; }&#39;</span>
+nix-build --expr <span class="s1">&#39;with import &lt;nixpkgs&gt; {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }&#39;</span>
 </pre></div>
 </div>
 <p>Note that you can write the nix expression directly to the <code class="docutils literal notranslate"><span class="pre">default.nix</span></code> file to avoid typing <code class="docutils literal notranslate"><span class="pre">--expr</span></code> each time.</p>
