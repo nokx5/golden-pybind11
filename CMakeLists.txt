@@ -20,8 +20,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(PROJECT_TESTS "Build Cpp Tests" ON)
 option(PROJECT_SANDBOX "Build Project Sandbox" OFF)
-option(PROJECT_BENCHMARK "Build Python Tests" OFF)
-option(PROJECT_VALIDATION "Build Python Validation" OFF)
+option(PROJECT_PYTHON "Build Python Wrapper (pybind)" ON)
+option(PROJECT_BENCHMARK "Build Benchmarks" OFF)
+option(PROJECT_VALIDATION "Build Validations" OFF)
 option(PROJECT_SANITIZER_ASAN "Sanitizer ASAN" OFF)
 option(PROJECT_SANITIZER_MSAN "Sanitizer MSAN" OFF)
 option(PROJECT_SANITIZER_TSAN "Sanitizer TSAN" OFF)
@@ -73,17 +74,19 @@ find_package(
   REQUIRED)
 include_directories(SYSTEM ${Boost_INCLUDE_DIR})
 
-# * Pybind11
-find_package(
-  Python
-  COMPONENTS Interpreter Development
-  REQUIRED)
-find_package(pybind11 CONFIG REQUIRED)
-
-if(NOT DEFINED CMAKE_INSTALL_PYTHON_SITE_PACKAGE)
-  set(CMAKE_INSTALL_PYTHON_SITE_PACKAGE
-      "${CMAKE_INSTALL_PREFIX}/lib/python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/site-packages/"
-  )
+if(${PROJECT_PYTHON})
+  # * Pybind11
+  find_package(
+    Python
+    COMPONENTS Interpreter Development
+    REQUIRED)
+  find_package(pybind11 CONFIG REQUIRED)
+  # python install prefix
+  if(NOT DEFINED CMAKE_INSTALL_PYTHON_SITE_PACKAGE)
+    set(CMAKE_INSTALL_PYTHON_SITE_PACKAGE
+        "${CMAKE_INSTALL_PREFIX}/lib/python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/site-packages/"
+    )
+  endif()
 endif()
 
 # ##############################################################################
@@ -96,12 +99,13 @@ include_directories("${CMAKE_SOURCE_DIR}/src" ${CMAKE_BINARY_DIR})
 # add_compile_definitions(COMPLEX_NUMBERS)
 # add_compile_definitions(FLOAT_NUMBERS)
 
-
 # ##############################################################################
 # PROJECT
 # ##############################################################################
 add_subdirectory(src/golden)
-add_subdirectory(src/binding)
+if(${PROJECT_PYTHON})
+  add_subdirectory(src/binding)
+endif()
 
 # ##############################################################################
 # TESTS and miscelaneous
@@ -110,7 +114,9 @@ if(${PROJECT_TESTS})
   include(CTest)
   enable_testing()
   add_subdirectory(tests/cpp/unit)
-  add_subdirectory(tests/python)
+  if(${PROJECT_PYTHON})
+    add_subdirectory(tests/python)
+  endif()
 endif()
 if(${PROJECT_SANDBOX})
   add_subdirectory(tests/cpp/sandbox)
