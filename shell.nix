@@ -4,7 +4,6 @@
 
 let
   stdenv = (with pkgs; if clangSupport then clangStdenv else gccStdenv);
-  pythonPackages = pkgs.python3Packages;
 
   vscodeExt = (with pkgs;
     vscode-with-extensions.override {
@@ -36,7 +35,7 @@ let
           }
         ];
     });
-  pythonEnv = (with pythonPackages; # note that checkInputs are missing!
+  pythonEnv = pkgs.python3.withPackages (ps: with ps;
     [ numpy ] ++ [
       #------------#
       # additional #
@@ -64,7 +63,7 @@ let
       nbformat
       nbconvert
       nbsphinx
-    ]);
+    ] ++ pkgs.lib.optionals (!isPy39) [ python-language-server ]);
 in
 (pkgs.mkShell.override { inherit stdenv; }) rec {
   buildInputs = (with pkgs;
