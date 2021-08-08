@@ -10,7 +10,7 @@ let
     vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions;
         [
-          bbenoist.Nix
+          bbenoist.nix
           eamodio.gitlens
           ms-vscode.cpptools
           ms-python.python
@@ -68,7 +68,7 @@ let
 in
 (pkgs.mkShell.override { inherit stdenv; }) rec {
   buildInputs = (with pkgs;
-    [ boost ] ++ [
+    [ boost17x ] ++ [
       zlib # stdenv.cc.cc.lib
     ] ++ [ pythonEnv ]);
   nativeBuildInputs = (with pkgs;
