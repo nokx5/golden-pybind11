@@ -166,6 +166,10 @@
 <p><a class="reference external" href="https://github.com/nokx5/golden-pybind11/actions/workflows/ci-linux.yml"><img alt="CILinuxBadge" src="https://github.com/nokx5/golden-pybind11/workflows/CI-linux/badge.svg" /></a> <a class="reference external" href="https://github.com/nokx5/golden-pybind11/actions/workflows/ci-darwin.yml"><img alt="CIDarwinBadge" src="https://github.com/nokx5/golden-pybind11/workflows/CI-darwin/badge.svg" /></a> <a class="reference external" href="https://nokx5.github.io/golden-pybind11"><img alt="DocBadge" src="https://github.com/nokx5/golden-pybind11/workflows/doc-api/badge.svg" /></a> <a class="reference external" href="https://github.com/nokx5/golden-pybind11/blob/master/LICENSE"><img alt="LicenseBadge" src="http://img.shields.io/badge/license-MIT-blue.svg" /></a></p>
 <p>This is a skeleton for a C++/python project template.
 Please find all the documentation <a class="reference external" href="https://nokx5.github.io/golden-pybind11">here</a> and the source code <a class="reference external" href="https://github.com/nokx5/golden-pybind11">there</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>NOTE:</strong> you may require the experimental flakes commands <cite>nix build</cite> and <cite>nix shell</cite> in the following. If you do not, only classic nix commands <cite>nix-build</cite> and <cite>nix-shell</cite> will be available.</p>
+</div>
 <section id="my-development-tools-are">
 <h2>My development tools are<a class="headerlink" href="#my-development-tools-are" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -183,28 +187,32 @@ Please find all the documentation <a class="reference external" href="https://no
 </li>
 <li><p>ctest (tests)</p></li>
 <li><p>pytest (tests)</p></li>
-<li><p>Sphinx (docs)</p></li>
+<li><p>sphinx (docs)</p></li>
 </ul>
 </section>
-<section id="use-the-classic-nix-commands">
-<h2>Use the classic Nix commands<a class="headerlink" href="#use-the-classic-nix-commands" title="Permalink to this headline">¶</a></h2>
-<section id="use-the-software-without-git-clone">
-<h3>Use the software (without git clone)<a class="headerlink" href="#use-the-software-without-git-clone" title="Permalink to this headline">¶</a></h3>
+<section id="use-the-software">
+<h2>Use the software<a class="headerlink" href="#use-the-software" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="https://github.com/nokx5/nokxpkgs#add-nokxpkgs-to-your-nix-channel">nokxpkgs</a> channel and associate overlay can be imported with the <code class="docutils literal notranslate"><span class="pre">-I</span></code> command or by setting the <code class="docutils literal notranslate"><span class="pre">NIX_PATH</span></code> environment variable.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix-shell -I <span class="nv">nixpkgs</span><span class="o">=</span>https://github.com/nokx5/nokxpkgs/archive/main.tar.gz -p golden-pybind11 --command cli_golden
+<span class="c1"># or</span>
+nix shell github:nokx5/golden-pybind11 --command cli_golden
+nix shell github:nokx5/nokxpkgs#golden-pybind11 --command cli_golden
 </pre></div>
 </div>
-</section>
-<section id="develop-the-software">
-<h3>Develop the software<a class="headerlink" href="#develop-the-software" title="Permalink to this headline">¶</a></h3>
+<section id="develop-the-software-depreciated-new-hash">
+<h3>Develop the software  (depreciated - new hash)<a class="headerlink" href="#develop-the-software-depreciated-new-hash" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please note that all commands of this section creates new hashes which means that the evaluation may require additional downloads.</p>
+</div>
 <p>Start by cloning the <a class="reference external" href="https://github.com/nokx5/golden-pybind11">git repository</a> golden python locally and enter it.</p>
 <section id="option-1-develop-the-software-minimal-requirements">
 <h4>Option 1: Develop the software (minimal requirements)<a class="headerlink" href="#option-1-develop-the-software-minimal-requirements" title="Permalink to this headline">¶</a></h4>
 <p>You can develop or build the local software easily with the minimal requirements.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># option a: develop with a local shell</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># option a: develop with a local shell (depreciated - new hash)</span>
 nix-shell --expr <span class="s1">&#39;with import &lt;nixpkgs&gt; {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }&#39;</span>
 
-<span class="c1"># option b: build the local project</span>
+<span class="c1"># option b: build the local project (depreciated - new hash)</span>
 nix-build --expr <span class="s1">&#39;with import &lt;nixpkgs&gt; {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }&#39;</span>
 </pre></div>
 </div>
@@ -213,18 +221,16 @@ nix-build --expr <span class="s1">&#39;with import &lt;nixpkgs&gt; {}; with pyth
 <section id="option-2-develop-the-software-supercharged">
 <h4>Option 2: Develop the software (supercharged 🛰️)<a class="headerlink" href="#option-2-develop-the-software-supercharged" title="Permalink to this headline">¶</a></h4>
 <p>You can enter the supercharged environment for development.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix-shell derivation-shell.nix
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix-shell shell.nix <span class="c1"># (depreciated - new hash)</span>
 </pre></div>
 </div>
 </section>
 </section>
-</section>
-<section id="use-the-experimental-flake-feature">
-<h2>Use the experimental flake feature<a class="headerlink" href="#use-the-experimental-flake-feature" title="Permalink to this headline">¶</a></h2>
+<section id="develop-the-software">
+<h3>Develop the software<a class="headerlink" href="#develop-the-software" title="Permalink to this headline">¶</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><strong>NOTE:</strong> This section requires the experimental <em>flake</em> and <em>nix-command</em> features. Please refer to the official documentation for nix flakes. The advantage of using nix flakes is that you avoid channel pinning issues.</p>
-</div>
 <p>After Nix was installed, update to the unstable feature with:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix-env -f <span class="s1">&#39;&lt;nixpkgs&gt;&#39;</span> -iA nixUnstable
 </pre></div>
@@ -234,29 +240,28 @@ nix-build --expr <span class="s1">&#39;with import &lt;nixpkgs&gt; {}; with pyth
 <span class="nb">echo</span> <span class="s1">&#39;experimental-features = nix-command flakes&#39;</span> &gt;&gt; ~/.config/nix/nix.conf
 </pre></div>
 </div>
-<section id="id1">
-<h3>Use the software (without git clone)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix shell github:nokx5/golden-pybind11 --command cli_golden
-</pre></div>
 </div>
-</section>
-<section id="id2">
-<h3>Develop the software<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Start by cloning the <a class="reference external" href="https://github.com/nokx5/golden-pybind11">git repository</a> locally and enter it.</p>
 <section id="option-1-develop-the-software">
 <h4>Option 1: Develop the software<a class="headerlink" href="#option-1-develop-the-software" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># option a: develop with a local shell</span>
 nix develop .#golden-pybind11
+<span class="c1"># or</span>
+nix-shell . -A packages.x86_64-linux.golden-pybind11
 
 <span class="c1"># option b: build the local project</span>
 nix build .#golden-pybind11
+<span class="c1"># or</span>
+nix-build . -A packages.x86_64-linux.golden-pybind11
 </pre></div>
 </div>
 </section>
-<section id="id4">
-<h4>Option 2: Develop the software (supercharged 🛰️)<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<section id="id2">
+<h4>Option 2: Develop the software (supercharged 🛰️)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <p>You can enter the development supercharged environment.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix develop .#fullDev
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix develop
+<span class="c1"># or</span>
+nix-shell . -A devShell.x86_64-linux
 </pre></div>
 </div>
 </section>

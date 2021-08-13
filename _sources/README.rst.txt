@@ -18,6 +18,8 @@ Welcome to the `golden binding`_ template
 This is a skeleton for a C++/python project template. 
 Please find all the documentation `here <https://nokx5.github.io/golden-pybind11>`_ and the source code `there <https://github.com/nokx5/golden-pybind11>`_.
 
+.. warning:: **NOTE:** you may require the experimental flakes commands `nix build` and `nix shell` in the following. If you do not, only classic nix commands `nix-build` and `nix-shell` will be available.
+
 My development tools are
 ========================
 
@@ -39,24 +41,25 @@ My development tools are
 
 - pytest (tests)
 
-- Sphinx (docs)
+- sphinx (docs)
 
-Use the classic Nix commands
-============================
-
-Use the software (without git clone)
-------------------------------------
-
+Use the software
+================
 
 The `nokxpkgs <https://github.com/nokx5/nokxpkgs#add-nokxpkgs-to-your-nix-channel>`_ channel and associate overlay can be imported with the ``-I`` command or by setting the ``NIX_PATH`` environment variable.
 
 .. code:: shell
 
     nix-shell -I nixpkgs=https://github.com/nokx5/nokxpkgs/archive/main.tar.gz -p golden-pybind11 --command cli_golden
+    # or
+    nix shell github:nokx5/golden-pybind11 --command cli_golden
+    nix shell github:nokx5/nokxpkgs#golden-pybind11 --command cli_golden
 
 
-Develop the software
---------------------
+Develop the software  (depreciated - new hash)
+----------------------------------------------
+
+.. warning:: Please note that all commands of this section creates new hashes which means that the evaluation may require additional downloads.
 
 Start by cloning the `git repository <https://github.com/nokx5/golden-pybind11>`_ golden python locally and enter it. 
 
@@ -67,10 +70,10 @@ You can develop or build the local software easily with the minimal requirements
 
 .. code:: shell
 
-    # option a: develop with a local shell
+    # option a: develop with a local shell (depreciated - new hash)
     nix-shell --expr 'with import <nixpkgs> {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }'
     
-    # option b: build the local project
+    # option b: build the local project (depreciated - new hash)
     nix-build --expr 'with import <nixpkgs> {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }'
 
 Note that you can write the nix expression directly to the ``default.nix`` file to avoid typing ``--expr`` each time.
@@ -82,37 +85,26 @@ You can enter the supercharged environment for development.
 
 .. code:: shell
 
-    nix-shell derivation-shell.nix
-
-
-Use the experimental flake feature
-==================================
-
-.. warning:: **NOTE:** This section requires the experimental *flake* and *nix-command* features. Please refer to the official documentation for nix flakes. The advantage of using nix flakes is that you avoid channel pinning issues.
-
-After Nix was installed, update to the unstable feature with:
-
-.. code:: shell
-
-    nix-env -f '<nixpkgs>' -iA nixUnstable
-
-And enable experimental features with:
-
-.. code:: shell
-
-    mkdir -p ~/.config/nix
-    echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
-
-Use the software (without git clone)
-------------------------------------
-
-.. code:: shell
-
-    nix shell github:nokx5/golden-pybind11 --command cli_golden
+    nix-shell shell.nix # (depreciated - new hash)
 
 
 Develop the software
 --------------------
+
+.. warning:: **NOTE:** This section requires the experimental *flake* and *nix-command* features. Please refer to the official documentation for nix flakes. The advantage of using nix flakes is that you avoid channel pinning issues.
+    
+    After Nix was installed, update to the unstable feature with:
+    
+    .. code:: shell
+    
+        nix-env -f '<nixpkgs>' -iA nixUnstable
+    
+    And enable experimental features with:
+    
+    .. code:: shell
+    
+        mkdir -p ~/.config/nix
+        echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
 
 Start by cloning the `git repository <https://github.com/nokx5/golden-pybind11>`_ locally and enter it. 
 
@@ -123,9 +115,14 @@ Option 1: Develop the software
 
     # option a: develop with a local shell
     nix develop .#golden-pybind11
+    # or
+    nix-shell . -A packages.x86_64-linux.golden-pybind11
 
     # option b: build the local project
     nix build .#golden-pybind11
+    # or
+    nix-build . -A packages.x86_64-linux.golden-pybind11
+
 
 Option 2: Develop the software (supercharged 🛰️)
 ................................................
@@ -134,7 +131,9 @@ You can enter the development supercharged environment.
 
 .. code:: shell
 
-    nix develop .#fullDev
+    nix develop
+    # or
+    nix-shell . -A devShell.x86_64-linux
 
 
 Installation with pip
