@@ -74,7 +74,7 @@ You can develop or build the local software easily with the minimal requirements
     nix-shell --expr 'with import <nixpkgs> {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }'
     
     # option b: build the local project (depreciated - new hash)
-    nix-build --expr 'with import <nixpkgs> {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }'
+    nix-build --expr 'with import <nixpkgs> {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }' --no-out-link
 
 Note that you can write the nix expression directly to the ``default.nix`` file to avoid typing ``--expr`` each time.
 

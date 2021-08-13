@@ -213,7 +213,7 @@ nix shell github:nokx5/nokxpkgs#golden-pybind11 --command cli_golden
 nix-shell --expr <span class="s1">&#39;with import &lt;nixpkgs&gt; {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }&#39;</span>
 
 <span class="c1"># option b: build the local project (depreciated - new hash)</span>
-nix-build --expr <span class="s1">&#39;with import &lt;nixpkgs&gt; {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }&#39;</span>
+nix-build --expr <span class="s1">&#39;with import &lt;nixpkgs&gt; {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }&#39;</span> --no-out-link
 </pre></div>
 </div>
 <p>Note that you can write the nix expression directly to the <code class="docutils literal notranslate"><span class="pre">default.nix</span></code> file to avoid typing <code class="docutils literal notranslate"><span class="pre">--expr</span></code> each time.</p>
