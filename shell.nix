@@ -75,6 +75,7 @@ in
       # stdenv.cc.cc
       # libcxxabi        
       bashCompletion
+      bashInteractive
       cacert
       clang-tools
       cmake-format

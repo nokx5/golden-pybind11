@@ -1,7 +1,7 @@
 { stdenv
 , buildPythonPackage
 , src
-, boost
+, boost17x
 , cmake
 , ninja
 , numpy
@@ -18,7 +18,7 @@ buildPythonPackage rec {
   inherit src;
 
   nativeBuildInputs = [ cmake ninja ];
-  buildInputs = [ boost pybind11 ];
+  buildInputs = [ boost17x pybind11 ];
   propagatedBuildInputs = [ numpy ];
   checkInputs = [ pytest ];
 

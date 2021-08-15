@@ -1,6 +1,8 @@
 {
   description = "A simple pybind11 flake";
 
+  nixConfig.bash-prompt = "\\033[0;33m\\033[1m\[dev-golden-pybind11\]\\033[0m\\033[0m$ ";
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
