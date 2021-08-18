@@ -24,7 +24,7 @@ buildPythonPackage rec {
 
   cmakeFlags = [
     "-DCMAKE_BUILD_TYPE=Release"
-    "-DPROJECT_TESTS=On"
+    "-DPROJECT_TESTS=ON"
     "-DPROJECT_SANDBOX=OFF"
   ];
   ninjaFlags = [ "-v" ];
@@ -38,10 +38,10 @@ buildPythonPackage rec {
   excludedTests = [ "test_python_interface" ];
   installCheckPhase = ''
     runHook preCheck
-    ctest -V -E "${builtins.concatStringsSep "|" excludedTests}"
+    ctest -T Test -V -E "${builtins.concatStringsSep "|" excludedTests}"
     export PYTHONPATH=$out/bin:$PYTHONPATH
     python -c "import pyview"
-    pytest $src/tests/python -p no:cacheprovider
+    pytest $src/tests/unit_python -p no:cacheprovider
     runHook postCheck
   '';
 }
