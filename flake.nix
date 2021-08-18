@@ -1,11 +1,9 @@
 {
   description = "A simple pybind11 flake";
 
-  nixConfig.bash-prompt = "\\033[0;33m\\033[1m\[dev-golden-pybind11\]\\033[0m\\033[0m$ ";
+  nixConfig.bash-prompt = "\\033[0;33m\\033[1m\[dev-golden-pybind11\] \\w\\033[0m\\033[0m$ ";
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  };
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
   outputs = { self, nixpkgs }:
     let
@@ -40,10 +38,6 @@
               src = self;
               stdenv = final.clangStdenv;
             };
-            # project_setuptools =
-            #   python-self.callPackage ./derivation-setuptools.nix {
-            #     src = self;
-            #   };
           };
         in
         {
@@ -72,7 +66,6 @@
       hydraJobs = {
         build = forDevSystems (system: nixpkgsFor.${system}.python3Packages.golden-pybind11);
         build-clang = forDevSystems (system: nixpkgsFor.${system}.python3Packages.golden-pybind11-clang);
-
         release = forDevSystems (system:
           with nixpkgsFor.${system}; releaseTools.aggregate
             {
@@ -90,6 +83,7 @@
               meta.description = "hydraJobs: ${repoDescription}";
             });
       };
+
       packages = forAllSystems (system:
         with nixpkgsFor.${system}; {
           inherit (python3Packages) golden-pybind11 golden-pybind11-clang;

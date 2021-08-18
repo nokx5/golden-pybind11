@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.18.2 FATAL_ERROR)
 
-# set(CMAKE_CXX_STANDARD 17) set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fPIC
-# -Wall")
-
 set(PROJECT_VERSION "0.0.0")
 
 project(
@@ -11,57 +8,39 @@ project(
   VERSION "${PROJECT_VERSION}"
   DESCRIPTION "Hybrid C++/Python Golden Project")
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_C_COMPILER $ENV{CC})
+set(CMAKE_CXX_COMPILER $ENV{CXX})
+
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake)
 
 # ##############################################################################
 # OPTIONS
 # ##############################################################################
 
-option(PROJECT_TESTS "Build Cpp Tests" ON)
-option(PROJECT_SANDBOX "Build Project Sandbox" OFF)
+option(PROJECT_BENCHMARK "Compile the performance in ctest" OFF)
+option(PROJECT_INTEGRATION "Compile the integration tests in ctest" OFF)
+option(PROJECT_MEMCHECK "Enable memcheck test with valgrind" OFF)
 option(PROJECT_PYTHON "Build Python Wrapper (pybind)" ON)
-option(PROJECT_BENCHMARK "Build Benchmarks" OFF)
-option(PROJECT_VALIDATION "Build Validations" OFF)
-option(PROJECT_SANITIZER_ASAN "Sanitizer ASAN" OFF)
-option(PROJECT_SANITIZER_MSAN "Sanitizer MSAN" OFF)
-option(PROJECT_SANITIZER_TSAN "Sanitizer TSAN" OFF)
-option(PROJECT_CODE_COVERAGE "Sanitizer TSAN" OFF)
-option(PROJECT_DOCUMENTATION "Build Project Documentation" OFF)
+option(PROJECT_UNIT_TESTS "Compile the unit tests in ctest" ON)
+option(PROJECT_SANDBOX "Compile the sandbox folder" OFF)
+option(PROJECT_STATIC "Build Static Libraries" OFF)
+option(PROJECT_TBBMALLOC_PROXY
+       "enable tbb_malloc_proxy linking (conflicts with pybind)" OFF)
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-  # using Clang
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-  # using GCC
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
-  # using Intel C++
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  # using Visual Studio C++
-endif()
+# ##############################################################################
+# FLAGS
+# ##############################################################################
 
-set(PROJECT_CXX_FLAGS_DEBUG -fno-omit-frame-pointer -fno-inline)
-set(PROJECT_CXX_FLAGS_RELEASE -mfma -mavx) # SIMD? -mftree-vectorize
-set(PROJECT_CXX_FLAGS_RELWITHDEBUG ${PROJECT_CXX_FLAGS_RELEASE} -g)
-set(PROJECT_CXX_FLAGS_MINSIZERELEASE ${PROJECT_CXX_FLAGS_RELEASE} -g)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_compile_options(
-  ${CMAKE_CXX_FLAGS}
-  "$<$<CONFIG:Debug>:${PROJECT_CXX_FLAGS_DEBUG}>"
-  "$<$<CONFIG:Release>:${PROJECT_CXX_FLAGS_RELEASE}>"
-  "$<$<CONFIG:RelWithDebug>:${PROJECT_CXX_FLAGS_RELWITHDEBUG}>"
-  "$<$<CONFIG:MinSizeRelease>:${PROJECT_CXX_FLAGS_MINSIZERELEASE}>")
-
-if(${PROJECT_ASAN})
-  set(CMAKE_CXX_FLAGS "-O -g -fsanitize=address")
-endif()
-
-if(${PROJECT_TSAN})
-  set(CMAKE_CXX_FLAGS "-O -g -fsanitize=thread -fopenmp")
-endif()
-
-if(${PROJECT_MSAN})
-  set(CMAKE_CXX_FLAGS
-      "-fsanitize=memory -fPIE -pie -fno-omit-frame-pointer -g -O2")
+add_compile_options(-Wall -Wextra)
+# #
+# https://stackoverflow.com/questions/45955272/modern-way-to-set-compiler-flags-in-cross-platform-cmake-project
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND APPLE)
+  add_compile_options("-Wa" "-q")
+else()
+  # TODO
 endif()
 
 # ##############################################################################
@@ -73,6 +52,18 @@ find_package(
   COMPONENTS filesystem system program_options unit_test_framework
   REQUIRED)
 include_directories(SYSTEM ${Boost_INCLUDE_DIR})
+
+mark_as_advanced(
+  Boost_SYSTEM_LIBRARY_RELEASE Boost_FILESYSTEM_LIBRARY_RELEASE
+  Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE
+  Boost_UNIT_TEST_FRAMEWORK_LIBRARY_RELEASE)
+
+# * TBB
+if(${PROJECT_TBBMALLOC_PROXY})
+  find_package(TBB REQUIRED tbb tbbmalloc_proxy)
+else()
+  find_package(TBB REQUIRED tbb)
+endif()
 
 if(${PROJECT_PYTHON})
   # * Pybind11
@@ -96,34 +87,32 @@ configure_file("${CMAKE_SOURCE_DIR}/src/utils/static.hpp.in"
                "${CMAKE_BINARY_DIR}/static.hpp")
 include_directories("${CMAKE_SOURCE_DIR}/src" ${CMAKE_BINARY_DIR})
 
-# add_compile_definitions(COMPLEX_NUMBERS)
-# add_compile_definitions(FLOAT_NUMBERS)
-
 # ##############################################################################
 # PROJECT
 # ##############################################################################
 add_subdirectory(src/golden)
 if(${PROJECT_PYTHON})
-  add_subdirectory(src/binding)
+  add_subdirectory(src/pybind)
 endif()
 
 # ##############################################################################
 # TESTS and miscelaneous
 # ##############################################################################
-if(${PROJECT_TESTS})
-  include(CTest)
-  enable_testing()
-  add_subdirectory(tests/cpp/unit)
+include(CTest)
+# enable_testing()
+
+if(${PROJECT_UNIT_TESTS})
+  add_subdirectory(tests/cpp_unit)
   if(${PROJECT_PYTHON})
-    add_subdirectory(tests/python)
+    add_subdirectory(tests/python_unit)
   endif()
 endif()
 if(${PROJECT_SANDBOX})
-  add_subdirectory(tests/cpp/sandbox)
+  add_subdirectory(tests/sandbox)
 endif()
 if(${PROJECT_BENCHMARK})
-  add_subdirectory(tests/cpp/benchmark)
+  add_subdirectory(tests/cpp_benchmark)
 endif()
-if(${PROJECT_VALIDATION})
-  add_subdirectory(tests/cpp/validation)
+if(${PROJECT_INTEGRATION})
+  add_subdirectory(tests/cpp_integration)
 endif()

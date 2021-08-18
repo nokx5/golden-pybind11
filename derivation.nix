@@ -2,7 +2,7 @@
 , buildPythonPackage
 , src
 , boost17x
-, cmake
+, cmakeMinimal
 , ninja
 , numpy
 , pybind11
@@ -17,7 +17,7 @@ buildPythonPackage rec {
   format = "other";
   inherit src;
 
-  nativeBuildInputs = [ cmake ninja ];
+  nativeBuildInputs = [ cmakeMinimal ninja ];
   buildInputs = [ boost17x pybind11 ];
   propagatedBuildInputs = [ numpy ];
   checkInputs = [ pytest ];
