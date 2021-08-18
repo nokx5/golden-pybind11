@@ -5,7 +5,7 @@ add_test(
 set_tests_properties(
   test_python_interface
   PROPERTIES ENVIRONMENT
-             PYTHONPATH=${CMAKE_BINARY_DIR}/src/pybind_view/:$ENV{PYTHONPATH})
+             PYTHONPATH=${CMAKE_BINARY_DIR}/src/pybind/:$ENV{PYTHONPATH})
 
 # add_custom_target(test_python_interface )
 # add_dependencies(test_python_interface pyview)

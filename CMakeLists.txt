@@ -49,7 +49,7 @@ endif()
 # * Boost
 find_package(
   Boost REQUIRED
-  COMPONENTS filesystem system program_options unit_test_framework
+  COMPONENTS filesystem program_options unit_test_framework system
   REQUIRED)
 include_directories(SYSTEM ${Boost_INCLUDE_DIR})
 
