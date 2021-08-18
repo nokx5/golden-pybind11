@@ -1,11 +1,17 @@
+add_custom_target(
+  python_interface_msg ALL
+  COMMAND
+    echo && echo
+    "# You may want to import the pybind11 library during development." && echo
+    "export PYTHONPATH=$<TARGET_FILE_DIR:pyview>:'$$'PYTHONPATH" && echo
+  COMMENT "look for python interface"
+  VERBATIM)
+add_dependencies(python_interface_msg pyview)
+
 add_test(
-  NAME test_python_interface
+  NAME pytest_interface
   COMMAND pytest -vv ${CMAKE_SOURCE_DIR}
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 set_tests_properties(
-  test_python_interface
-  PROPERTIES ENVIRONMENT
-             PYTHONPATH=${CMAKE_BINARY_DIR}/src/pybind/:$ENV{PYTHONPATH})
-
-# add_custom_target(test_python_interface )
-# add_dependencies(test_python_interface pyview)
+  pytest_interface
+  PROPERTIES ENVIRONMENT PYTHONPATH=$<TARGET_FILE_DIR:pyview>:$ENV{PYTHONPATH})
