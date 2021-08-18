@@ -156,6 +156,7 @@ Code Snippets
 =============
 
 .. code:: shell
+    black .
 
     nixfmt $(find -name "*.nix")
 
