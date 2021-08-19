@@ -279,9 +279,22 @@ nix-shell . -A devShell.x86_64-linux
 </div>
 </section>
 </section>
+<section id="link-to-derivations">
+<h1>Link to derivations<a class="headerlink" href="#link-to-derivations" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nix-build . -A packages.x86_64-linux.golden-pybind11 --out-link result-golden-pybind11
+nix-build . -A packages.x86_64-linux.golden-pybind11.inputDerivation --out-link result-golden-pybind11-dev
+nix-build . -A devShell.x86_64-linux.inputDerivation --out-link result-golden-pybind11-dev-full
+
+nix-build . -A packages.x86_64-linux.golden-pybind11-clang --out-link result-golden-pybind11-clang
+nix-build . -A packages.x86_64-linux.golden-pybind11-clang.inputDerivation --out-link result-golden-pybind11-clang-dev
+</pre></div>
+</div>
+</section>
 <section id="code-snippets">
 <h1>Code Snippets<a class="headerlink" href="#code-snippets" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nixfmt <span class="k">$(</span>find -name <span class="s2">&quot;*.nix&quot;</span><span class="k">)</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>black .
+
+nixfmt <span class="k">$(</span>find -name <span class="s2">&quot;*.nix&quot;</span><span class="k">)</span>
 
 clang-format -i <span class="k">$(</span>find . -path <span class="s2">&quot;./build*&quot;</span> -prune  -name <span class="s2">&quot;*.c&quot;</span> -o -name <span class="s2">&quot;*.cpp&quot;</span> -o -name <span class="s2">&quot;*.h&quot;</span> -o -name <span class="s2">&quot;*.hpp&quot;</span><span class="k">)</span>
 

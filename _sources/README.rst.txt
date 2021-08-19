@@ -15,7 +15,7 @@ Welcome to the `golden binding`_ template
 .. |LicenseBadge| image:: http://img.shields.io/badge/license-MIT-blue.svg
 .. _LicenseBadge: https://github.com/nokx5/golden-pybind11/blob/master/LICENSE
 
-This is a skeleton for a C++/python project template. 
+This is a skeleton for a C++/python project template.
 Please find all the documentation `here <https://nokx5.github.io/golden-pybind11>`_ and the source code `there <https://github.com/nokx5/golden-pybind11>`_.
 
 .. warning:: **NOTE:** you may require the experimental flakes commands `nix build` and `nix shell` in the following. If you do not, only classic nix commands `nix-build` and `nix-shell` will be available.
@@ -28,9 +28,9 @@ My development tools are
 - clang-format (formatter)
 
 - black (formatter)
-  
+
 - vscode (IDE) with
-  
+
   - ms-vscode.cmake-tools
   - ms-vscode.cpptools
   - ms-python.vscode-pylance
@@ -61,7 +61,7 @@ Develop the software  (depreciated - new hash)
 
 .. warning:: Please note that all commands of this section creates new hashes which means that the evaluation may require additional downloads.
 
-Start by cloning the `git repository <https://github.com/nokx5/golden-pybind11>`_ golden python locally and enter it. 
+Start by cloning the `git repository <https://github.com/nokx5/golden-pybind11>`_ golden python locally and enter it.
 
 Option 1: Develop the software (minimal requirements)
 .....................................................
@@ -72,7 +72,7 @@ You can develop or build the local software easily with the minimal requirements
 
     # option a: develop with a local shell (depreciated - new hash)
     nix-shell --expr 'with import <nixpkgs> {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }'
-    
+
     # option b: build the local project (depreciated - new hash)
     nix-build --expr 'with import <nixpkgs> {}; with python3Packages; callPackage ./derivation.nix {src = ./.; }' --no-out-link
 
@@ -92,21 +92,21 @@ Develop the software
 --------------------
 
 .. warning:: **NOTE:** This section requires the experimental *flake* and *nix-command* features. Please refer to the official documentation for nix flakes. The advantage of using nix flakes is that you avoid channel pinning issues.
-    
+
     After Nix was installed, update to the unstable feature with:
-    
+
     .. code:: shell
-    
+
         nix-env -f '<nixpkgs>' -iA nixUnstable
-    
+
     And enable experimental features with:
-    
+
     .. code:: shell
-    
+
         mkdir -p ~/.config/nix
         echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
 
-Start by cloning the `git repository <https://github.com/nokx5/golden-pybind11>`_ locally and enter it. 
+Start by cloning the `git repository <https://github.com/nokx5/golden-pybind11>`_ locally and enter it.
 
 Option 1: Develop the software
 ..............................
@@ -151,11 +151,27 @@ Or you can install from source with:
 
     python setup.py install
 
+===================
+Link to derivations
+===================
+
+.. code:: shell
+
+    nix-build . -A packages.x86_64-linux.golden-pybind11 --out-link result-golden-pybind11
+    nix-build . -A packages.x86_64-linux.golden-pybind11.inputDerivation --out-link result-golden-pybind11-dev
+    nix-build . -A devShell.x86_64-linux.inputDerivation --out-link result-golden-pybind11-dev-full
+    
+    nix-build . -A packages.x86_64-linux.golden-pybind11-clang --out-link result-golden-pybind11-clang
+    nix-build . -A packages.x86_64-linux.golden-pybind11-clang.inputDerivation --out-link result-golden-pybind11-clang-dev
+
+
 =============
 Code Snippets
 =============
 
 .. code:: shell
+
+    black .
 
     nixfmt $(find -name "*.nix")
 
