@@ -151,6 +151,20 @@ Or you can install from source with:
 
     python setup.py install
 
+===================
+Link to derivations
+===================
+
+.. code:: shell
+
+    nix-build . -A packages.x86_64-linux.golden-pybind11 --out-link result-golden-pybind11
+    nix-build . -A packages.x86_64-linux.golden-pybind11.inputDerivation --out-link result-golden-pybind11-dev
+    nix-build . -A devShell.x86_64-linux.inputDerivation --out-link result-golden-pybind11-dev-full
+    
+    nix-build . -A packages.x86_64-linux.golden-pybind11-clang --out-link result-golden-pybind11-clang
+    nix-build . -A packages.x86_64-linux.golden-pybind11-clang.inputDerivation --out-link result-golden-pybind11-clang-dev
+
+
 =============
 Code Snippets
 =============
