@@ -7,6 +7,7 @@
 , numpy
 , pybind11
 , pytest
+, tbb
 , sphinx
 , sphinx_rtd_theme
 }:
@@ -18,7 +19,7 @@ buildPythonPackage rec {
   inherit src;
 
   nativeBuildInputs = [ cmakeMinimal ninja ];
-  buildInputs = [ boost17x pybind11 ];
+  buildInputs = [ boost17x pybind11 tbb ];
   propagatedBuildInputs = [ numpy ];
   checkInputs = [ pytest ];
 
@@ -34,14 +35,4 @@ buildPythonPackage rec {
   enableParallelChecking = true;
 
   installPhase = "ninja install";
-
-  excludedTests = [ "test_python_interface" ];
-  installCheckPhase = ''
-    runHook preCheck
-    ctest -T Test -V -E "${builtins.concatStringsSep "|" excludedTests}"
-    export PYTHONPATH=$out/bin:$PYTHONPATH
-    python -c "import pyview"
-    pytest $src/tests/unit_python -p no:cacheprovider
-    runHook postCheck
-  '';
 }
