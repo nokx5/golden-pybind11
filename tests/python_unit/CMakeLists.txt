@@ -3,7 +3,7 @@ add_custom_target(
   COMMAND
     echo && echo
     "# You may want to import the pybind11 library during development." && echo
-    "export PYTHONPATH=$<TARGET_FILE_DIR:pyview>:'$$'PYTHONPATH" && echo
+    "export PYTHONPATH=$<TARGET_FILE_DIR:pyview>:$PYTHONPATH" && echo
   COMMENT "look for python interface"
   VERBATIM)
 add_dependencies(python_interface_msg pyview)
