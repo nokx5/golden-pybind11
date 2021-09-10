@@ -13,6 +13,7 @@ let
       ms-vscode.cpptools
       ms-python.python
       ms-python.vscode-pylance
+      ms-toolsai.jupyter
     ] ++ vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "cmake";
